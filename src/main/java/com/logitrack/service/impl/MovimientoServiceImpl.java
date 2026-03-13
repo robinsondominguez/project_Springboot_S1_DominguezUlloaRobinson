@@ -1,6 +1,8 @@
 package com.logitrack.service.impl;
 
+import com.logitrack.exception.ResourceNotFoundException;
 import com.logitrack.model.Movimiento;
+import com.logitrack.model.ReporteResumen;
 import com.logitrack.repository.MovimientoRepository;
 import com.logitrack.service.MovimientoService;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,7 @@ public class MovimientoServiceImpl implements MovimientoService {
 
     @Override
     public Movimiento obtenerPorId(Long id) {
-        return movimientoRepository.findById(id).orElse(null);
+        return movimientoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No El Movimiento De este Id"));
     }
 
     @Override
@@ -35,5 +37,10 @@ public class MovimientoServiceImpl implements MovimientoService {
     @Override
     public List<Movimiento> buscarPorFechas(LocalDateTime inicio, LocalDateTime fin) {
         return movimientoRepository.findByFechaBetween(inicio, fin);
+    }
+
+    @Override
+    public List<ReporteResumen> productosMasMovidos() {
+        return movimientoRepository.productosMasMovidos();
     }
 }

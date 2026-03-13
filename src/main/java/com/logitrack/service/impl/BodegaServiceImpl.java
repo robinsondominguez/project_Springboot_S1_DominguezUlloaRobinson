@@ -1,5 +1,6 @@
 package com.logitrack.service.impl;
 
+import com.logitrack.exception.ResourceNotFoundException;
 import com.logitrack.model.Bodega;
 import com.logitrack.repository.BodegaRepository;
 import com.logitrack.service.BodegaService;
@@ -25,7 +26,7 @@ public class BodegaServiceImpl implements BodegaService {
     @Override
     public Bodega obtenerPorId(Long id) {
         Optional<Bodega> bodega = bodegaRepository.findById(id);
-        return bodega.orElse(null);
+        return bodega.orElseThrow(() -> new ResourceNotFoundException("No Existe Este Ud"));
     }
 
     @Override
@@ -36,7 +37,7 @@ public class BodegaServiceImpl implements BodegaService {
     @Override
     public Bodega actualizar(Long id, Bodega bodega) {
 
-        Bodega bodegaExistente = bodegaRepository.findById(id).orElse(null);
+        Bodega bodegaExistente = bodegaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No se encontro una bodega a partir de este Id"));;
 
         if (bodegaExistente != null) {
             bodegaExistente.setNombre(bodega.getNombre());
