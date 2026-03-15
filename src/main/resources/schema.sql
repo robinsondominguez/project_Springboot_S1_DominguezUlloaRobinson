@@ -1,12 +1,12 @@
 
 CREATE DATABASE IF NOT EXISTS logitrack_db;
-
+show databases;
 USE logitrack_db;
 
 
 -- TABLA USUARIOS
 
-CREATE TABLE usuarios (
+CREATE TABLE IF NOT EXISTS usuarios (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE usuarios (
 
 -- TABLA BODEGAS
 
-CREATE TABLE bodegas (
+CREATE TABLE IF NOT EXISTS bodegas (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     ubicacion VARCHAR(150),
@@ -27,7 +27,7 @@ CREATE TABLE bodegas (
 
 -- TABLA PRODUCTOS
 
-CREATE TABLE productos (
+CREATE TABLE IF NOT EXISTS productos (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     categoria VARCHAR(100),
@@ -38,7 +38,7 @@ CREATE TABLE productos (
 
 -- TABLA MOVIMIENTOS
 
-CREATE TABLE movimientos (
+CREATE TABLE IF NOT EXISTS movimientos (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     fecha DATETIME NOT NULL,
     tipo_movimiento VARCHAR(20) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE movimientos (
 
 -- TABLA DETALLE_MOVIMIENTOS
 
-CREATE TABLE detalle_movimientos (
+CREATE TABLE IF NOT EXISTS detalle_movimientos (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     movimiento_id BIGINT,
     producto_id BIGINT,
@@ -66,7 +66,7 @@ CREATE TABLE detalle_movimientos (
 
 -- TABLA AUDITORIA
 
-CREATE TABLE auditoria (
+CREATE TABLE IF NOT EXISTS auditoria (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     operacion VARCHAR(20),
     fecha DATETIME,
