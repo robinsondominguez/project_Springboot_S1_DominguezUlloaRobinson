@@ -12,4 +12,7 @@ public interface UsuarioService {
 
     Usuario guardar(Usuario usuario);
 
+    Usuario buscarPorId(Long id);
+
+    Usuario buscarPorNombre(String username);
 }

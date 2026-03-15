@@ -1,5 +1,6 @@
 package com.logitrack.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,7 +8,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "movimientos")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Movimiento {
@@ -26,10 +28,12 @@ public class Movimiento {
     private Usuario usuario;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "bodega_origen_id")
     private Bodega bodegaOrigen;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "bodega_destino_id")
     private Bodega bodegaDestino;
 

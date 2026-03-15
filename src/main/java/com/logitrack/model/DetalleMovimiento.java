@@ -1,11 +1,13 @@
 package com.logitrack.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @Table(name = "detalle_movimientos")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class DetalleMovimiento {
@@ -17,6 +19,7 @@ public class DetalleMovimiento {
     private Integer cantidad;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "movimiento_id")
     private Movimiento movimiento;
 

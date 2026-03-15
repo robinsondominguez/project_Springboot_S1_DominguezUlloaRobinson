@@ -1,5 +1,7 @@
 package com.logitrack.controller;
 
+import com.logitrack.dto.response.AuthControllerResponseDTO;
+import com.logitrack.dto.response.UsuarioResponseDTO;
 import com.logitrack.model.Usuario;
 import com.logitrack.security.JwtUtil;
 import com.logitrack.service.UsuarioService;
@@ -35,17 +37,22 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    @Operation(summary = "Registrar nuevo usuario")
-    public Usuario register(@RequestBody Usuario usuario) {
+    public UsuarioResponseDTO register(@RequestBody Usuario usuario) {
 
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 
-        return usuarioService.guardar(usuario);
+        Usuario usuarioGuardado = usuarioService.guardar(usuario);
+
+        return new UsuarioResponseDTO(
+                usuarioGuardado.getId(),
+                usuarioGuardado.getUsername(),
+                usuarioGuardado.getRol().name()
+        );
     }
 
+
     @PostMapping("/login")
-    @Operation(summary = "Login de usuario y generación de token JWT")
-    public String login(@RequestBody Usuario usuario) {
+    public AuthControllerResponseDTO login(@RequestBody Usuario usuario) {
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -54,6 +61,8 @@ public class AuthController {
                 )
         );
 
-        return jwtUtil.generarToken(usuario.getUsername());
+        String token = jwtUtil.generarToken(usuario.getUsername());
+
+        return new AuthControllerResponseDTO(token);
     }
 }

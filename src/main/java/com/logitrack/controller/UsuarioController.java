@@ -30,4 +30,16 @@ public class UsuarioController {
     public Usuario guardar(@RequestBody Usuario usuario) {
         return usuarioService.guardar(usuario);
     }
+
+    @Operation(summary = "Buscar por Id")
+    @GetMapping("/{id}")
+    public Usuario buscarPorId(@PathVariable Long id) {
+        return usuarioService.buscarPorId(id);
+    }
+
+    @Operation(summary = "Buscar por nombre")
+    @GetMapping("/buscar")
+    public Usuario buscarPorUsername(@RequestParam String username) {
+        return usuarioService.buscarPorNombre(username);
+    }
 }
