@@ -1,0 +1,120 @@
+/* Variables de color */
+:root {
+    --primary: #4361ee;
+    --success: #4cc9f0;
+    --warning: #f72585;
+    --dark: #212529;
+    --bg-body: #f8f9fa;
+    --glass-bg: rgba(255, 255, 255, 0.9);
+}
+
+body {
+    background-color: var(--bg-body);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--dark);
+}
+
+.logo-text {
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-top: -5px;
+}
+
+/* Tarjetas con efecto cristal */
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.section-title {
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--primary);
+    padding-left: 10px;
+}
+
+/* Inputs personalizados */
+.custom-input {
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+    padding: 10px 15px;
+    transition: all 0.3s;
+}
+
+.custom-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.15);
+}
+
+/* Botones personalizados */
+.btn-primary-custom { background-color: var(--primary); color: white; border-radius: 10px; padding: 10px; border: none; font-weight: 600; }
+.btn-success-custom { background-color: #2ec4b6; color: white; border-radius: 10px; border: none; font-weight: 600; }
+.btn-warning-custom { background-color: #ff9f1c; color: white; border-radius: 10px; border: none; font-weight: 600; }
+.btn-refresh { border-radius: 20px; font-weight: 600; color: var(--primary); border: 2px solid var(--primary); }
+
+.btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* Tabla estilizada */
+.table-custom {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+.table-custom thead th {
+    border: none;
+    color: #6c757d;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+.table-custom tbody tr {
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+.table-custom tbody tr:hover {
+    transform: scale(1.01);
+}
+
+.table-custom td {
+    padding: 15px;
+    vertical-align: middle;
+    border: none;
+}
+
+.table-custom td:first-child { border-radius: 10px 0 0 10px; font-weight: bold; }
+.table-custom td:last-child { border-radius: 0 10px 10px 0; }
+
+/* Indicador de estado */
+.status-indicator {
+    background: #e9ecef;
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-indicator span { color: #dc3545; }
+.status-connected span { color: #198754; }
+
+/* Output JSON */
+#json-output {
+    background: #1e1e1e;
+    color: #a6e22e;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    border: 1px solid #333;
+}

@@ -1,0 +1,43 @@
+{
+    "id": 1,
+    "nombre": "Bodega Principal",
+    "ubicacion": "Bucaramanga",
+    "capacidad": 500,
+    "encargado": "Robin"
+}
+
+{
+    "id": 2,
+    "nombre": "Bodega Norte",
+    "ubicacion": "Girón",
+    "capacidad": 300,
+    "encargado": "Ana"
+}
+
+{
+    "id": 5,
+    "nombre": "Bodega Central Bogota",
+    "ubicacion": "Sector Industrial",
+    "capacidad": 500,
+    "encargado": "Eliana"
+}
+
+{
+    "id": 1,
+    "nombre": "Laptop AMD",
+    "categoria": "Hardware",
+    "stock": 10,
+    "precio": 850.0
+}
+
+{
+    "id": 1,
+    "username": "admin",
+    "rol": "ADMIN"
+}
+
+{
+    "id": 2,
+    "username": "empleado",
+    "rol": "EMPLEADO"
+}
