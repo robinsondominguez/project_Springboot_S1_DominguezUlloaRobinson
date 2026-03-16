@@ -31,4 +31,9 @@ public class Auditoria {
     @Column(columnDefinition = "TEXT")
     private String valorNuevo;
 
+    @PrePersist
+    public void prePersist(){
+        this.fecha = LocalDateTime.now();
+    }
+
 }

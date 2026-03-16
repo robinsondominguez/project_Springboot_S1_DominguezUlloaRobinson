@@ -3,6 +3,7 @@ package com.logitrack.service.impl;
 import com.logitrack.model.Auditoria;
 import com.logitrack.repository.AuditoriaRepository;
 import com.logitrack.service.AuditoriaService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class AuditoriaServiceImpl implements AuditoriaService {
     }
 
     @Override
+    @Transactional
     public Auditoria guardar(Auditoria auditoria) {
         return auditoriaRepository.save(auditoria);
     }

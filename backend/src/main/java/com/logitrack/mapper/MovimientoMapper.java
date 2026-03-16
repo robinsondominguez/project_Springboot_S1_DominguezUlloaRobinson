@@ -15,7 +15,6 @@ public class MovimientoMapper {
         dto.setFecha(movimiento.getFecha());
         dto.setTipoMovimiento(movimiento.getTipoMovimiento().toString());
 
-        // Solo pasamos los nombres o IDs para no cargar toda la entidad
         if (movimiento.getUsuario() != null) {
             dto.setNombreUsuario(movimiento.getUsuario().getUsername());
         }
