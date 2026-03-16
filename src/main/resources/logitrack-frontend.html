@@ -499,7 +499,8 @@ function Movimientos({toast}) {
   async function handleCreate(e) {
     e.preventDefault();setSaving(true);
     try {
-      await api('/api/movimientos',{method:'POST',body:{
+      // Paso 1: crear el movimiento y obtener el ID generado
+      const movimiento = await api('/api/movimientos',{method:'POST',body:{
         tipoMovimiento:form.tipoMovimiento,
         usuarioId:parseInt(form.usuarioId),
         productoId:form.productoId?parseInt(form.productoId):undefined,
@@ -507,7 +508,23 @@ function Movimientos({toast}) {
         bodegaOrigenId:form.bodegaOrigenId?parseInt(form.bodegaOrigenId):undefined,
         bodegaDestinoId:form.bodegaDestinoId?parseInt(form.bodegaDestinoId):undefined,
       }});
-      toast('Movimiento registrado');setShowModal(false);load();
+
+      // Paso 2: si se selecciono producto y cantidad, crear el detalle
+      // Esto es lo que realmente actualiza el stock del producto
+      if(form.productoId && form.cantidad && parseInt(form.cantidad) > 0){
+        await api('/api/detalles',{method:'POST',body:{
+          movimientoId: movimiento.id,
+          productoId:   parseInt(form.productoId),
+          cantidad:     parseInt(form.cantidad),
+        }});
+        toast('Movimiento registrado y stock actualizado');
+      } else {
+        toast('Movimiento registrado');
+      }
+
+      setShowModal(false);
+      setForm({tipoMovimiento:'ENTRADA',usuarioId:'',productoId:'',cantidad:'',bodegaOrigenId:'',bodegaDestinoId:''});
+      load();
     }catch(err){toast(err.message,'error');}
     finally{setSaving(false);}
   }

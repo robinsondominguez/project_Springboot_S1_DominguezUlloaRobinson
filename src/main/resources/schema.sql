@@ -1,5 +1,5 @@
 
-CREATE DATABASE IF NOT EXISTS logitrack_db;
+CREATE DATABASE IF NOT EXISTS logitrack_db_DominguezRobinson;
 
 USE logitrack_db;
 
