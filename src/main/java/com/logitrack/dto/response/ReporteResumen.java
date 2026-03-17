@@ -1,4 +1,4 @@
-package com.logitrack.model;
+package com.logitrack.dto.response;
 
 public class ReporteResumen {
 

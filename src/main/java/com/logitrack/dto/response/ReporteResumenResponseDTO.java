@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 import java.util.Map;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class ReporteResumenResponseDTO {
+    private Long totalProductos;
+    private Long totalMovimientos;
+    private String estadoSistema;
     private Map<String, Integer> stockPorBodega;
     private Map<String, Integer> productosMasMovidos;
-    private long totalProductos;
-    private long totalMovimientos;
-    private String estadoSistema;
 }

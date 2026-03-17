@@ -44,7 +44,7 @@ import java.util.List;
         public SecurityFilterChain securityFilterChain(HttpSecurity http, DaoAuthenticationProvider provider) throws Exception {
 
             http
-                    .cors(cors -> cors.configurationSource(corsConfigurationSource())) // <-- AÑADIDO PARA EL FRONTEND
+                    .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                     .csrf(csrf -> csrf.disable())
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers(
@@ -69,10 +69,9 @@ import java.util.List;
         @Bean
         public CorsConfigurationSource corsConfigurationSource() {
             CorsConfiguration config = new CorsConfiguration();
-            config.setAllowedOrigins(List.of("http://127.0.0.1:3000", "http://localhost:3000"));
+            config.setAllowedOrigins(List.of("*"));
             config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-            config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
-            config.setAllowCredentials(true);
+            config.setAllowedHeaders(List.of("*"));
 
             UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
             source.registerCorsConfiguration("/**", config);

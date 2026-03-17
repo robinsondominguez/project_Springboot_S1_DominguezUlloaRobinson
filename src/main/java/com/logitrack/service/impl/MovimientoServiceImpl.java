@@ -2,9 +2,9 @@ package com.logitrack.service.impl;
 
 import com.logitrack.dto.request.MovimientoRequestDTO;
 import com.logitrack.dto.response.MovimientoResponseDTO;
+import com.logitrack.dto.response.ReporteResumen;
 import com.logitrack.mapper.MovimientoMapper;
 import com.logitrack.model.Movimiento;
-import com.logitrack.model.ReporteResumen;
 import com.logitrack.model.TipoMovimiento;
 import com.logitrack.repository.BodegaRepository;
 import com.logitrack.repository.MovimientoRepository;
@@ -38,19 +38,23 @@ public class MovimientoServiceImpl implements MovimientoService {
         Movimiento movimiento = new Movimiento();
         movimiento.setFecha(LocalDateTime.now());
         movimiento.setTipoMovimiento(TipoMovimiento.valueOf(dto.getTipoMovimiento().toUpperCase()));
-        movimiento.setUsuario(usuarioRepository.findById(dto.getUsuarioId()).orElseThrow(() -> new RuntimeException("Usuario no encontrado")));
+        movimiento.setUsuario(usuarioRepository.findById(dto.getUsuarioId())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado")));
 
         if (dto.getProductoId() != null) {
-            movimiento.setProducto(productoRepository.findById(dto.getProductoId()).orElseThrow(() -> new RuntimeException("Producto no encontrado")));
+            movimiento.setProducto(productoRepository.findById(dto.getProductoId())
+                    .orElseThrow(() -> new RuntimeException("Producto no encontrado")));
         }
 
         movimiento.setCantidad(dto.getCantidad());
 
         if (dto.getBodegaOrigenId() != null) {
-            movimiento.setBodegaOrigen(bodegaRepository.findById(dto.getBodegaOrigenId()).orElseThrow(() -> new RuntimeException("Bodega origen no encontrada")));
+            movimiento.setBodegaOrigen(bodegaRepository.findById(dto.getBodegaOrigenId())
+                    .orElseThrow(() -> new RuntimeException("Bodega origen no encontrada")));
         }
         if (dto.getBodegaDestinoId() != null) {
-            movimiento.setBodegaDestino(bodegaRepository.findById(dto.getBodegaDestinoId()).orElseThrow(() -> new RuntimeException("Bodega destino no encontrada")));
+            movimiento.setBodegaDestino(bodegaRepository.findById(dto.getBodegaDestinoId())
+                    .orElseThrow(() -> new RuntimeException("Bodega destino no encontrada")));
         }
 
         Movimiento guardado = movimientoRepository.save(movimiento);
@@ -79,6 +83,11 @@ public class MovimientoServiceImpl implements MovimientoService {
     }
 
     @Override
+    public List<Movimiento> listarPorRango(LocalDateTime inicio, LocalDateTime fin) {
+        return movimientoRepository.findByFechaBetween(inicio, fin);
+    }
+
+    @Override
     public List<ReporteResumen> productosMasMovidos() {
         List<Movimiento> movimientos = movimientoRepository.findAll();
         Map<String, Long> conteo = new HashMap<>();
@@ -86,7 +95,6 @@ public class MovimientoServiceImpl implements MovimientoService {
         for (Movimiento mov : movimientos) {
             if (mov.getProducto() != null) {
                 String nombre = mov.getProducto().getNombre();
-                // Usamos la cantidad del movimiento
                 Long valor = (mov.getCantidad() != null) ? mov.getCantidad().longValue() : 0L;
                 conteo.put(nombre, conteo.getOrDefault(nombre, 0L) + valor);
             }
@@ -109,7 +117,6 @@ public class MovimientoServiceImpl implements MovimientoService {
 
         Map<String, Integer> stockBodegas = new HashMap<>();
         bodegaRepository.findAll().forEach(b -> {
-            // Usamos b.getCapacidad() porque así está en tu clase Bodega
             stockBodegas.put(b.getNombre(), b.getCapacidad() != null ? b.getCapacidad() : 0);
         });
 
@@ -118,10 +125,5 @@ public class MovimientoServiceImpl implements MovimientoService {
         reporteFinal.put("fechaReporte", LocalDateTime.now());
 
         return reporteFinal;
-    }
-
-    @Override
-    public List<Movimiento> listarPorRango(LocalDateTime inicio, LocalDateTime fin) {
-        return movimientoRepository.findByFechaBetween(inicio, fin);
     }
 }

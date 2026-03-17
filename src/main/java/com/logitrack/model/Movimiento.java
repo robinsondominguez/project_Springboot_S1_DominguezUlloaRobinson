@@ -21,14 +21,11 @@ public class Movimiento {
 
     @Enumerated(EnumType.STRING)
     private TipoMovimiento tipoMovimiento;
-
-    // --- AGREGA ESTO ---
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
 
     private Integer cantidad;
-    // -------------------
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
