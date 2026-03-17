@@ -7,12 +7,12 @@ USE logitrack_db;
 -- ─────────────────────────────────────────────
 --  BODEGAS
 -- ─────────────────────────────────────────────
-INSERT INTO bodegas (id, nombre, ubicacion) VALUES
-(1, 'Bodega Norte',    'Calle 80 #15-30, Bogotá'),
-(2, 'Bodega Sur',      'Av. Las Américas #60-10, Bogotá'),
-(3, 'Bodega Central',  'Carrera 30 #45-20, Medellín'),
-(4, 'Bodega Oriente',  'Zona Industrial Km 5, Cali'),
-(5, 'Bodega Exterior', 'Proveedor / Cliente Externo');
+    INSERT INTO bodegas (id, nombre, ubicacion) VALUES
+    (1, 'Bodega Norte',    'Calle 80 #15-30, Bogotá'),
+    (2, 'Bodega Sur',      'Av. Las Américas #60-10, Bogotá'),
+    (3, 'Bodega Central',  'Carrera 30 #45-20, Medellín'),
+    (4, 'Bodega Oriente',  'Zona Industrial Km 5, Cali'),
+    (5, 'Bodega Exterior', 'Proveedor / Cliente Externo');
 
 -- Bodega 5 = "Bodega Exterior" representa el mundo exterior
 -- ENTRADA: viene de Bodega Exterior (5) hacia una bodega interna
@@ -69,14 +69,13 @@ INSERT INTO detalle_movimientos (cantidad, producto_id, movimiento_id) VALUES
 -- ─────────────────────────────────────────────
 --  AUDITORIAS
 -- ─────────────────────────────────────────────
-INSERT INTO auditorias (accion, fecha, usuario, tabla, detalle_id, descripcion) VALUES
-('INSERT', '2026-03-01 08:00:00', 'admin',            'usuarios',     '1', 'Creación de usuario administrador'),
-('INSERT', '2026-03-01 08:05:00', 'admin',            'productos',    '1', 'Producto creado: Tornillos M6'),
-('INSERT', '2026-03-01 08:30:00', 'admin',            'movimientos',  '1', 'Registro de ENTRADA masiva de suministros'),
-('UPDATE', '2026-03-05 14:15:00', 'operador1',        'productos',    '7', 'Stock disminuido por SALIDA. Producto: Pallets de madera'),
-('INSERT', '2026-03-08 09:00:00', 'carlos_logistica', 'movimientos',  '4', 'Transferencia entre Bodega Norte y Central'),
-('DELETE', '2026-03-15 13:30:00', 'admin',            'productos',   '10', 'Producto marcado para baja: Extintor 5kg');
-
+INSERT INTO auditorias (operacion, fecha, usuario, entidad, valor_anterior, valor_nuevo) VALUES
+('INSERT', '2026-03-01 08:00:00', 'admin',            'usuarios',    'N/A',                          'Creación de usuario administrador'),
+('INSERT', '2026-03-01 08:05:00', 'admin',            'productos',   'N/A',                          'Producto creado: Tornillos M6'),
+('INSERT', '2026-03-01 08:30:00', 'admin',            'movimientos', 'N/A',                          'Registro de ENTRADA masiva de suministros'),
+('UPDATE', '2026-03-05 14:15:00', 'operador1',        'productos',   'Stock anterior',               'Stock disminuido por SALIDA. Producto: Pallets de madera'),
+('INSERT', '2026-03-08 09:00:00', 'carlos_logistica', 'movimientos', 'N/A',                          'Transferencia entre Bodega Norte y Central'),
+('DELETE', '2026-03-15 13:30:00', 'admin',            'productos',   'Producto: Extintor 5kg',       'ELIMINADO');
 -- ─────────────────────────────────────────────
 --  VERIFICACIÓN
 -- ─────────────────────────────────────────────

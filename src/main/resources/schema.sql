@@ -49,9 +49,9 @@ CREATE TABLE detalle_movimientos (
 
 CREATE TABLE auditorias (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    accion VARCHAR(50),
+    operacion VARCHAR(50),
     fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
-    usuario VARCHAR(50),
+    entidad VARCHAR(50),
     tabla VARCHAR(50),
     detalle_id VARCHAR(100),
     descripcion TEXT
