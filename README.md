@@ -5,6 +5,24 @@
 
 API REST desarrollada con Spring Boot 3 para la gestión de inventario en bodegas. Permite registrar productos, controlar movimientos de mercancía (entradas, salidas y transferencias entre bodegas), gestionar usuarios con autenticación JWT y consultar reportes del estado del inventario.
 
+### Problematica
+
+La empresa LogiTrack S.A. administra varias bodegas distribuidas en distintas ciudades, encargadas de almacenar productos y gestionar movimientos de inventario (entradas, salidas, y transferencias).
+
+Hasta ahora, el control de inventarios y auditorías se hacía manualmente en hojas de cálculo, sin trazabilidad ni control de accesos.
+
+La dirección general busca implementar un sistema backend centralizado en Spring Boot, que permita:
+
+Controlar todos los movimientos entre bodegas.
+Registrar automáticamente los cambios (auditorías).
+Proteger la información con autenticación JWT.
+Ofrecer endpoints REST documentados y seguros.
+
+
+### Objetivo General
+Desarrollar un sistema de gestión y auditoría de bodegas que permita registrar transacciones de inventario y generar reportes auditables de los cambios realizados por cada usuario.
+
+
 ---
 
 ## Tecnologías
