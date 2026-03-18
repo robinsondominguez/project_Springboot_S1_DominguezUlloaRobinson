@@ -39,31 +39,22 @@ public class AuthController {
     @PostMapping("/register")
     @Operation(summary = "Registro de usuario", description = "Requiere Username, Password y el role que se va a dar")
     public UsuarioResponseDTO register(@RequestBody Usuario usuario) {
-
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-
         Usuario usuarioGuardado = usuarioService.guardar(usuario);
 
-        return new UsuarioResponseDTO(
-                usuarioGuardado.getId(),
-                usuarioGuardado.getUsername(),
-                usuarioGuardado.getRol().name()
-        );
+        return new UsuarioResponseDTO(usuarioGuardado.getId(), usuarioGuardado.getUsername(), usuarioGuardado.getRol().name());
     }
 
 
     @PostMapping("/login")
-    public AuthControllerResponseDTO login(@RequestBody Usuario usuario) {
-
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
+    public AuthControllerResponseDTO login(@RequestBody Usuario usuario) {authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(
                         usuario.getUsername(),
-                        usuario.getPassword()
-                )
-        );
+                        usuario.getPassword()));
 
         String token = jwtUtil.generarToken(usuario.getUsername());
+        Usuario usuarioGuardado = usuarioService.buscarPorNombre(usuario.getUsername());
 
-        return new AuthControllerResponseDTO(token);
+        return new AuthControllerResponseDTO(token, usuarioGuardado.getUsername(), usuarioGuardado.getRol().name());
     }
 }

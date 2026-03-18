@@ -10,4 +10,7 @@ public class AuthControllerResponseDTO {
 
     private String token;
 
+    private String username;
+    private String rol;
+
 }

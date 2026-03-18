@@ -10,6 +10,6 @@ import java.time.LocalDateTime;
 public class MovimientoResponseDTO {
     private Long id;
     private LocalDateTime fecha;
-    private String tipoMovimiento; // ENTRADA, SALIDA, TRANSFERENCIA
-    private String nombreUsuario;  // El username del modelo Usuario
+    private String tipoMovimiento;
+    private String nombreUsuario;
 }
