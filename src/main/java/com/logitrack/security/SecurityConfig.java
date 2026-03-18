@@ -44,19 +44,21 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, DaoAuthenticationProvider provider) throws Exception {
 
-        http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
+        http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
 
-                        // ─── Endpoints publicos ───────────────────────────────────────
+                        // Endpoints publicos
                         .requestMatchers(
                                 "/auth/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
-                        ).permitAll().requestMatchers(HttpMethod.POST, "/api/productos").hasAuthority("ADMIN")
+                        ).permitAll()
 
-
+                        // Solo ADMIN
+                        .requestMatchers(HttpMethod.POST,   "/api/productos").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.POST,   "/api/bodegas").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.PUT,    "/api/bodegas/**").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/bodegas/**").hasAuthority("ADMIN")
@@ -64,20 +66,24 @@ public class SecurityConfig {
                         .requestMatchers("/auditorias/**").hasAuthority("ADMIN")
                         .requestMatchers("/api/reportes/**").hasAuthority("ADMIN")
 
-
-
-o
-                        .requestMatchers(HttpMethod.GET, "/api/productos/**").authenticated()
+                        // ADMIN y EMPLEADO
+                        .requestMatchers(HttpMethod.GET,  "/api/productos/**").authenticated()
                         .requestMatchers(HttpMethod.GET,  "/api/movimientos/**").authenticated()
                         .requestMatchers(HttpMethod.POST, "/api/movimientos").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/bodegas/**").authenticated()
+                        .requestMatchers(HttpMethod.GET,  "/api/bodegas/**").authenticated()
                         .requestMatchers(HttpMethod.GET,  "/api/detalles/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/detalles").authenticated().anyRequest().authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/detalles").authenticated()
+
+                        .anyRequest().authenticated()
                 )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(provider);
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .authenticationProvider(provider);
 
         http.addFilterBefore(jwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 
