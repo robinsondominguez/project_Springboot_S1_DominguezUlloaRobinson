@@ -1,9 +1,9 @@
 
 CREATE DATABASE IF NOT EXISTS logitrack_db_DominguezRobinson;
 
-USE logitrack_db;
+USE logitrack_db_DominguezRobinson;
 
- -- drop database logitrack_db;
+ -- drop database logitrack_db_DominguezRobinson;
 
 CREATE TABLE usuarios (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,

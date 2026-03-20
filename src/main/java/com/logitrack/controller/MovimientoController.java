@@ -46,7 +46,6 @@ public class MovimientoController {
     public ResponseEntity<List<MovimientoResponseDTO>> getPorFechas(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicio,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fin) {
-
         return ResponseEntity.ok(movimientoService.buscarPorFechas(inicio, fin));
     }
 
@@ -55,4 +54,11 @@ public class MovimientoController {
     public ResponseEntity<Map<String, Object>> obtenerResumenGeneral() {
         return ResponseEntity.ok(movimientoService.generarReporteGeneral());
     }
+
+    @GetMapping
+    @Operation(summary = "Listar los ultimos 10 movimientos")
+    public ResponseEntity<List<MovimientoResponseDTO>> listarRecientes() {
+        return ResponseEntity.ok(movimientoService.listarRecientes());
+    }
+
 }

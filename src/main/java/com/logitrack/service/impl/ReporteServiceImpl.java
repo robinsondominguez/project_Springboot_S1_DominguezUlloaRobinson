@@ -52,4 +52,16 @@ public class ReporteServiceImpl implements ReporteService {
 
         return reporte;
     }
+
+    @Override
+    public ReporteResumenResponseDTO obtenerResumenMovimiento() {
+        
+        ReporteResumenResponseDTO reporteMovimiento = new ReporteResumenResponseDTO();
+
+        reporteMovimiento.setTotalMovimientos(movimientoRepository.count());
+        reporteMovimiento.setTotalTipoMovimiento(movimientoRepository.count());
+        reporteMovimiento.setEstadoSistema("SISTEMA LOGITRACK OPERATIVO");
+
+        return reporteMovimiento;
+    }
 }

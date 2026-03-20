@@ -22,4 +22,10 @@ public class ReporteController {
     public ResponseEntity<ReporteResumenResponseDTO> obtenerResumenGeneral() {
         return ResponseEntity.ok(reporteService.obtenerResumenGeneral());
     }
+
+    @GetMapping("/resumen/movimiento")
+    @Operation(summary = "Reporte resumen general: stock por bodega y productos más movidos")
+    public ResponseEntity<ReporteResumenResponseDTO> ObtenerResumenMovimiento() {
+        return ResponseEntity.ok(reporteService.obtenerResumenMovimiento());
+    }
 }

@@ -24,4 +24,6 @@ public interface MovimientoService {
     List<ReporteResumen> productosMasMovidos();
 
     Map<String, Object> generarReporteGeneral();
+
+    List<MovimientoResponseDTO> listarRecientes();
 }

@@ -14,4 +14,7 @@ public class ReporteResumenResponseDTO {
     private String estadoSistema;
     private Map<String, Integer> stockPorBodega;
     private Map<String, Integer> productosMasMovidos;
+
+    public void setTotalTipoMovimiento(long count) {
+    }
 }

@@ -126,4 +126,15 @@ public class MovimientoServiceImpl implements MovimientoService {
 
         return reporteFinal;
     }
+
+    @Override
+    public List<MovimientoResponseDTO> listarRecientes() {
+        return movimientoRepository.findTop10ByMovimientoIdOrderByFechaDesc().stream()
+                .map(mapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    // FindAll -> Buscar todos.
+    // Find ? -> Que deberia usar?
+    // findTop10ByProductoIdOrderByFechaDesc() encontrar los 10 Superiores por productoId Por fecha descendente.
 }
